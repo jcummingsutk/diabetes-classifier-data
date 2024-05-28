@@ -16,6 +16,7 @@ steps:
 
 - bash: |
     source activate diabetes-classifier-data
+    dvc pull
     dvc repro
     python -m diabetes_data_code.upload_data_to_blob_script
   displayName: Upload Data
