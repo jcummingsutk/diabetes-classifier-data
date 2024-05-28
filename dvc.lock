@@ -1,0 +1,59 @@
+schema: '2.0'
+stages:
+  process_raw_diabetes_data:
+    cmd: python -m diabetes_data_code.process_data_script
+    deps:
+    - path: data/raw/diabetes.csv
+      hash: md5
+      md5: 8f90e44047182c5f32d10f0c4dd4890f
+      size: 22738154
+    - path: diabetes_data_code/process_data.py
+      hash: md5
+      md5: 031a1ea90c1d549db8409a3cd2c52e16
+      size: 487
+    - path: diabetes_data_code/process_data_script.py
+      hash: md5
+      md5: 2f64c8e647e3270114a07aae389d59bb
+      size: 623
+    outs:
+    - path: data/processed/df_processed.pkl
+      hash: md5
+      md5: 8b1e486b1666b057a7a9d8bec372591f
+      size: 38560259
+  create_train_test_data:
+    cmd: python -m diabetes_data_code.train_test_upsample_script
+    deps:
+    - path: diabetes_data_code/train_test_upsample.py
+      hash: md5
+      md5: 6d4e49f92ed44d9fca0f2fe7147f3d8f
+      size: 2023
+    - path: diabetes_data_code/train_test_upsample_script.py
+      hash: md5
+      md5: 5d6e5904dd938c25544f2277b9967e54
+      size: 3262
+    params:
+      data_params.yaml:
+        xgboost_training.num_cross_validation_sets: 5
+        xgboost_training.training_percentage: 0.8
+    outs:
+    - path: data/training/X_test.pkl
+      hash: md5
+      md5: d1c519e651b5c872ad136cb0899c0bdf
+      size: 30848377
+    - path: data/training/X_train.pkl
+      hash: md5
+      md5: 6483dc67a99e8806df048db3f607a66c
+      size: 7712757
+    - path: data/training/X_train_upsample.pkl
+      hash: md5
+      md5: c48dbba29c681e60ba403dea4633b4e5
+      size: 12582020
+    - path: data/training/cv
+      hash: md5
+      md5: 2b53a207c32e4b74c19058b29ab270f9.dir
+      size: 97791661
+      nfiles: 30
+    - path: data/training/y_test.pkl
+      hash: md5
+      md5: d1c519e651b5c872ad136cb0899c0bdf
+      size: 30848377

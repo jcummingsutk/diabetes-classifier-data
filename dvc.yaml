@@ -1,0 +1,25 @@
+stages:
+  process_raw_diabetes_data:
+    cmd: python -m diabetes_data_code.process_data_script
+    deps:
+      - diabetes_data_code/process_data_script.py
+      - diabetes_data_code/process_data.py
+      - data/raw/diabetes.csv
+    outs: 
+      - data/processed/df_processed.pkl
+  create_train_test_data:
+    cmd: python -m diabetes_data_code.train_test_upsample_script
+    params:
+      - data_params.yaml:
+        - xgboost_training.training_percentage
+        - xgboost_training.num_cross_validation_sets
+    deps:
+      - diabetes_data_code/train_test_upsample_script.py
+      - diabetes_data_code/train_test_upsample.py
+    #   - data/processed/diabetes.csv
+    outs:
+      - data/training/X_train.pkl
+      - data/training/X_train_upsample.pkl
+      - data/training/cv
+      - data/training/X_test.pkl
+      - data/training/y_test.pkl

@@ -13,5 +13,5 @@ def rename_diabetes_column(df_raw: pd.DataFrame) -> pd.DataFrame:
 
 
 def remove_unimportant_cols(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.drop(columns=["AnyHealthcare", "HvyAlcoholConsump"])
+    df = df.drop(columns=["AnyHealthcare", "HvyAlcoholConsump", "CholCheck"])
     return df

@@ -1,0 +1,3 @@
+xgboost_training:
+  training_percentage: .8
+  num_cross_validation_sets: 5
