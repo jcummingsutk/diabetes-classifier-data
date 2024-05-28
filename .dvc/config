@@ -1,2 +1,6 @@
 [core]
     autostage = true
+    remote = diabetes_remote
+['remote "diabetes_remote"']
+    url = azure://2024diabetesclassifierdata
+    account_name = 2024diabetesclassifier
